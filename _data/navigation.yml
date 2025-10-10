@@ -4,7 +4,7 @@ main:
     url: /
   - title: "About"
     links:
-    url: /https://www.notion.so/a8704ed93ab44bdd9bced532e9d17647
+    url: https://www.notion.so/a8704ed93ab44bdd9bced532e9d17647
   - title: "Posts"
     url: /posts/
   - title: "Categories"
