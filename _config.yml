@@ -12,4 +12,4 @@ plugins:
   - jekyll-seo-tag
   - jekyll-gist
 
-theme: Minimal Mistakes
+theme: minimal-mistakes-jekyll
