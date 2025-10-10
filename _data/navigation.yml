@@ -1,9 +1,10 @@
 # main links (기존 코드 유지)
 main:
   - title: "Home"
-    url: https://www.notion.so/a8704ed93ab44bdd9bced532e9d17647
+    url: /
   - title: "About"
-    url: /about/
+    links:
+    url: /https://www.notion.so/a8704ed93ab44bdd9bced532e9d17647
   - title: "Posts"
     url: /posts/
   - title: "Categories"
