@@ -5,10 +5,6 @@ sidebar:
   nav: "study-categories"
 ---
 
-<div style="text-align: center; margin-bottom: 2em;">
-  <h1> Nam David Devlog</h1>
-  <p style="font-size: 1.2em; color: #666; margin-top: 0.5em;">나의 개발을 기록하는 블로그</p>
-</div>
 
 ## 👨‍💻 개발자 소개
 안녕하세요! 개발과 학습을 기록하는 남다윗입니다.  
