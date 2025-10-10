@@ -1,1 +1,15 @@
-theme: minima
+title: "Dev Blog"
+description: "개발 학습을 기록 블로그"
+url: "https://github.com/nameight88"
+author:
+  name: "Nam David"
+  email: "david0108@knou.ac.kr"
+
+# 블로그 플러그인
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-gist
+
+theme: Minimal Mistakes
