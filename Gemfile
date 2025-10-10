@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-gem "github-pages", "~> 232"
-gem "minimal-mistakes-jekyll", "~> 4.17.1"
+gem "github-pages", "~> 232", group: :jekyll_plugins
+gem "jekyll-include-cache", group: :jekyll_plugins

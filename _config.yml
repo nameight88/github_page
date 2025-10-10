@@ -1,15 +1,56 @@
-title: "Dev Blog"
-description: "개발 학습을 기록 블로그"
-url: "https://github.com/nameight88"
-author:
-  name: "Nam David"
-  email: "david0108@knou.ac.kr"
+# Theme 설정
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 
-# 블로그 플러그인
+# 플러그인 설정
 plugins:
-  - jekyll-feed
+  - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-seo-tag
   - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
 
-theme: minimal-mistakes-jekyll
+# Minimal Mistakes 기본 설정
+minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+
+# Site Settings
+locale: "ko-KR"
+title: "Nam David의 블로그"
+title_separator: "-"
+subtitle: "개발 블로그"
+name: "Nam David"
+description: "개발 경험과 학습을 공유하는 블로그"
+url: "https://nameight88.github.io"
+baseurl: "/github_page"
+repository: "nameight88/github_page"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
+
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
