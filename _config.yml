@@ -54,6 +54,8 @@ defaults:
       comments: true
       share: true
       related: true
+      sidebar:
+        nav: "study-categories"
 
 # Sidebar 설정
 defaults:
@@ -79,3 +81,13 @@ defaults:
       author_profile: true
       sidebar:
         nav: "study-categories"
+# Author 설정
+author:
+  name: "Nam David"
+  avatar: "/assets/images/avatar.jpg" # 프로필 이미지 경로
+  bio: "개발을 기록하는 블로그"
+  location: "Seoul, Korea"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/nameight88"

@@ -1,6 +1,17 @@
 ---
-title: SQL-server 백업 자동화 하기
-date: 2025-05-12
+layout: single
+title: "SQL-server 백업 자동화 하기"
+date: 2024-05-12
+categories: 
+  - sql-server
+  - database
+tags:
+  - sql-server
+  - backup
+  - automation
+read_time: true
+sidebar:
+  nav: "study-categories"
 ---
 
 # SQL-Server_Backup_auto_System(DR.ver)

@@ -3,10 +3,15 @@ layout: single
 title: "Effective C++"
 date: 2025-10-10
 categories: 
-  - c-cpp
+  - cpp
+  - programming
 tags:
-  - C/C++
-  - Effective C++
+  - cpp
+  - effective
+  - programming
+read_time: true
+sidebar:
+  nav: "study-categories"
 toc: true
 toc_sticky: true
 ---
