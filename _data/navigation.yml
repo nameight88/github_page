@@ -1,0 +1,21 @@
+# main links (기존 코드 유지)
+main:
+  - title: "Home"
+    url: /
+  - title: "About"
+    url: /about/
+  - title: "Posts"
+    url: /posts/
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/
+
+# 사이드바 카테고리 네비게이션
+study-categories:
+  - title: "프로그래밍 언어"
+    children:
+      - title: "C/C++"
+        url: /categories/c-cpp/
+
+  
