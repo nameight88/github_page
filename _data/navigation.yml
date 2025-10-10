@@ -13,28 +13,28 @@ study-categories:
   - title: "프로그래밍 언어"
     children:
       - title: "Python"
-        url: /categories/#python
+        url: /categories/python
       - title: "C/C++"
-        url: /categories/#cpp
+        url: /categories/cpp
       - title: "Java"
-        url: /categories/#java
+        url: /categories/java
       - title: "JavaScript"
-        url: /categories/#javascript
+        url: /categories/javascript
   
   - title: "데이터베이스"
     children:
       - title: "MySQL"
-        url: /categories/#mysql
+        url: /categories/mysql
       - title: "PostgreSQL"
-        url: /categories/#postgresql
+        url: /categories/postgresql
       - title: "SQL Server"
-        url: /categories/#sql-server
+        url: /categories/sql-server
   
   - title: "AI/머신러닝"
     children:
       - title: "LangChain"
-        url: /categories/#langchain
+        url: /categories/langchain
       - title: "Ollama"
-        url: /categories/#ollama
+        url: /categories/ollama
       - title: "Hugging Face"
-        url: /categories/#huggingface
+        url: /categories/huggingface
