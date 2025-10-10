@@ -84,7 +84,7 @@ defaults:
 # Author 설정
 author:
   name: "Nam David"
-  avatar: "/assets/images/avatar.jpg" # 프로필 이미지 경로
+  avatar: "/assets/images/profile.png" # 프로필 이미지 경로
   bio: "개발을 기록하는 블로그"
   location: "Seoul, Korea"
   links:
