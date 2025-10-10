@@ -1,0 +1,334 @@
+## 핵심 개념
+
+**#define의 문제점**을 이해하고, 이를 **const, enum, inline**으로 대체하는 방법을 연습
+
+---
+
+## 1. #define의 문제점
+
+### 1.1 전처리기의 동작 방식
+
+cpp
+
+`#define ASPECT_RATIO_ASIS 1.653`
+
+**문제점:**
+
+- 전처리기가 컴파일 전에 단순 텍스트 치환
+- 심볼 테이블에 등록되지 않음
+- 디버깅 시 `ASPECT_RATIO_ASIS` 대신 `1.653`만 보임
+- 컴파일 에러 발생 시 추적 어려움
+
+### 1.2 캡슐화 문제
+
+cpp
+
+`#define NUM_TURNS 5
+
+class GamePlayer_Define_Version {
+private:
+    int scores[NUM_TURNS];  *// private이지만 NUM_TURNS는 전역*
+};
+
+void someFunction() {
+    int array[NUM_TURNS];  *// 어디서든 접근 가능!*
+}`
+
+**문제점:**
+
+- `#define`은 스코프를 무시함
+- 클래스의 `private` 영역에 선언해도 전역에서 사용 가능
+- 네임스페이스 적용 불가
+- 의도하지 않은 이름 충돌 가능
+
+---
+
+## 2. 해결책
+
+### 2.1 const 상수 사용
+
+### 기본 타입
+
+cpp
+
+`class DefinitionExample {
+    *// ❌ Bad*
+    #define ASPECT_RATIO_ASIS 1.653
+    
+    *// ✅ Good*
+    const double AspectRatioTobe = 1.653;
+};`
+
+**장점:**
+
+- 타입 안정성 확보
+- 스코프 지정 가능
+- 디버거에서 심볼 확인 가능
+
+### 문자열 상수
+
+cpp
+
+`class DefinitionExample {
+    *// ✅ C++ 방식*
+    const std::string authorName = "name_value";
+    
+    *// ⚠️ C 방식 (비추천)*
+    const char* const authorName = "name_value";
+};`
+
+### 2.2 클래스 전용 상수
+
+### static const 멤버
+
+cpp
+
+`class GamePlayer {
+private:
+    static const int NumTurns = 5;  *// 클래스 내부에서만 접근 가능*
+    int scores[NumTurns];
+};`
+
+**특징:**
+
+- 클래스 스코프로 제한
+- 캡슐화 유지
+- 컴파일 타임 상수
+
+### 클래스 외부 정의가 필요한 경우
+
+cpp
+
+`class ConstInitialization {
+private:
+    static const int intValue = 100;           *// 선언 + 초기화 (정수형 OK)*
+    static const double doubleValue;           *// 선언만 (실수형은 외부 정의 필요)*
+    static constexpr double pi = 3.14159;      *// C++11: constexpr 사용*
+};
+
+*// cpp 파일에서 정의*
+const double ConstInitialization::doubleValue = 1.234;`
+
+**규칙:**
+
+- **정수형 (int, long 등)**: 클래스 내부 초기화 가능
+- **실수형 (double, float)**: 클래스 외부 정의 필요 (C++11 이전)
+- **C++11 이후**: `constexpr` 사용 시 모든 타입 내부 초기화 가능
+
+### 2.3 enum hack
+
+cpp
+
+`class GamePlayer {
+private:
+    enum { MaxPlayers = 4 };  *// const int와 유사하게 동작*
+    int playerData[MaxPlayers];
+};`
+
+**사용 이유:**
+
+- 구형 컴파일러에서 static const 초기화가 지원되지 않을 때
+- 주소를 취할 수 없음 (포인터/참조 방지)
+- 템플릿 메타프로그래밍에서 유용
+
+**enum vs const 비교:**
+
+cpp
+
+`static const int NumTurns = 5;
+const int* ptr = &NumTurns;        *// ✅ 가능*
+
+enum { MaxPlayers = 4 };
+const int* ptr = &MaxPlayers;      *// ❌ 불가능*`
+
+### 2.4 constexpr (C++11)
+
+cpp
+
+`class GamePlayer {
+private:
+    static constexpr int MinPlayers = 1;
+    static constexpr double pi = 3.14159;
+};`
+
+**장점:**
+
+- 모든 타입에 대해 클래스 내부 초기화 가능
+- 컴파일 타임 상수 보장
+- 현대 C++의 권장 방식
+
+---
+
+## 3. 비교 정리
+
+### #define vs const
+
+```
+구분#defineconst처리 시점전처리컴파일타입 안정성❌ 없음✅ 있음스코프❌ 전역✅ 제한 가능디버깅❌ 어려움✅ 용이함캡슐화❌ 불가능✅ 가능
+```
+
+### 상수 선언 방법 선택 가이드
+
+cpp
+
+`class Example {
+    *// 1. 정수형 상수 → static const 또는 constexpr*
+    static const int Value1 = 10;
+    static constexpr int Value2 = 20;  *// C++11 이후 권장*
+    
+    *// 2. 주소가 필요 없는 상수 → enum hack*
+    enum { BufferSize = 256 };
+    
+    *// 3. 실수형 상수 → constexpr (C++11) 또는 외부 정의*
+    static constexpr double Pi = 3.14159;
+    
+    *// 4. 문자열 상수 → const std::string*
+    static const std::string Name;
+};`
+
+---
+
+## 4. 실전 예제
+
+### Bad Example (캡슐화 위반)
+
+cpp
+
+`namespace BadExample {
+    #define MAX_SIZE 100
+    
+    class Container {
+    private:
+        int data[MAX_SIZE];  *// private이지만...*
+    };
+}
+
+void someFunction() {
+    int array[MAX_SIZE];  *// 전역에서 사용 가능! ❌*
+}`
+
+### Good Example (캡슐화 유지)
+
+cpp
+
+`namespace GoodExample {
+    class Container {
+    private:
+        static const int MAX_SIZE = 100;  *// 진짜 private*
+        int data[MAX_SIZE];
+    };
+}
+
+void someFunction() {
+    *// int array[MAX_SIZE];  // ❌ 컴파일 에러 - 접근 불가*
+}`
+
+---
+
+## 핵심 정리
+
+1. **#define 대신 const 사용** → 타입 안정성, 스코프 제어
+2. **클래스 전용 상수는 static const/constexpr** → 캡슐화 유지
+3. **주소가 필요 없으면 enum hack** → 최적화
+4. **C++11 이후는 constexpr 권장** → 모든 타입 지원
+
+> 기억할 것: #define은 전처리기에서 처리되어 컴파일러가 보지 못하므로, const, enum, inline을 사용하여 컴파일러가 관리하도록 하자.
+> 
+
+```cpp
+// Chapter 1: item_2 Definition.cpp
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+// ========================================
+// Item 2: #define의 문제점과 해결책
+// ========================================
+
+class definition_example_1 {
+    #define ASPECT_RATIO_ASIS 1.653
+    const double AspectRatioTobe = 1.653;
+};
+
+class definition_example_2 {
+    const std::string authorName = "name_value";
+};
+
+class definition_class {
+private:
+    static const int number_value = 10;
+    int score[number_value];
+};
+
+#define NUM_TURNS 5
+
+class GamePlayer_Define_Version {
+private:
+    int scores[NUM_TURNS];
+};
+
+class GamePlayer {
+private:
+    static const int NumTurns = 5;
+    enum { MaxPlayers = 4 };
+    static constexpr int MinPlayers = 1;
+    int scores[NumTurns];
+};
+
+namespace BadExample {
+    #define MAX_SIZE 100
+    class Container {
+    private:
+        int data[MAX_SIZE];
+    };
+}
+
+void someFunction() {
+    int array[MAX_SIZE];
+}
+
+namespace GoodExample {
+    class Container {
+    private:
+        static const int MAX_SIZE = 100; 
+        int data[MAX_SIZE];
+    };
+}
+
+// ========================================
+// Main 함수
+// ========================================
+
+int main() {
+    // #define 캡슐화 문제 ===
+    int Player_Score[NUM_TURNS];
+    // "NUM_TURNS를 클래스 외부에서 사용: " << NUM_TURNS << endl;
+    //"배열 크기: " << sizeof(Player_Score) / sizeof(int) << endl;
+    
+    cout << "\n=== const 캡슐화 유지 ===" << endl;
+    cout << "GamePlayer::NumTurns는 private이므로 외부 접근 불가\n" << endl;
+    
+    
+    
+
+    return 0;
+}
+
+// ========================================
+// 추가 설명: static const 멤버의 정의
+// ========================================
+
+class ConstInitialization {
+private:
+    static const int intValue = 100;
+    static const long longValue = 200L;
+    static const double doubleValue;
+    static const float floatValue;
+    static constexpr double pi = 3.14159;
+    static constexpr float e = 2.71828f;
+};
+
+const double ConstInitialization::doubleValue = 1.234;
+const float ConstInitialization::floatValue = 5.678f;
+```
