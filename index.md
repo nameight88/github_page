@@ -6,12 +6,11 @@ sidebar:
 ---
 
 <div style="text-align: center; margin-bottom: 2em;">
-  <h1>🚀 Nam David Devlog</h1>
-  <p style="font-size: 1.2em; color: #666; margin-top: 0.5em;">나의 개발을 기록하는 블로그</p>
+  <h1>Devlog</h1>
 </div>
 
 ## 👨‍💻 개발자 소개
-안녕하세요! 개발과 학습을 기록하는 Nam David입니다.  
+안녕하세요! 개발과 학습을 기록하는 남다윗입니다.  
 이 블로그에서는 프로그래밍, 데이터베이스, AI 등 다양한 기술 스택을 학습하며 얻은 경험과 지식을 공유합니다.
 
 ## 📝 최근 포스트
