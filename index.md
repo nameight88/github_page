@@ -5,6 +5,11 @@ sidebar:
   nav: "study-categories"
 ---
 
+<!-- archive 레이아웃은 page.title이 없어도 빈 h1을 출력하므로 숨긴다 -->
+<style>
+  #page-title { display: none; }
+</style>
+
 ## 📝 최근 포스트
 
 {% for post in site.posts limit: 5 %}
