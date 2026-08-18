@@ -1,36 +1,29 @@
 ---
-layout: home
+layout: archive
 author_profile: true
 sidebar:
   nav: "study-categories"
 ---
 
-<div style="text-align: center; margin-bottom: 2em;">
-  <h1>Devlog</h1>
-</div>
-
-## 👨‍💻 개발자 소개
-안녕하세요! 개발과 학습을 기록하는 남다윗입니다.  
-이 블로그에서는 프로그래밍, 데이터베이스, AI 등 다양한 기술 스택을 학습하며 얻은 경험과 지식을 공유합니다.
-
 ## 📝 최근 포스트
-<!-- 최근 포스트들이 자동으로 여기에 표시됩니다 -->
 
-<div style="text-align: center; margin-top: 2em;">
-  <a href="{{ '/posts/' | relative_url }}" style="background: #0366d6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">📖 모든 포스트 보기</a>
-</div>
+{% for post in site.posts limit: 5 %}
+  {% include archive-single.html %}
+{% endfor %}
 
+## 📚 카테고리 둘러보기
 
-#### 📚 주요 학습 분야
-
-##### 🖥️ 프로그래밍 언어
-**Python** | **C/C++** | **Java** | **JavaScript**
-
-##### 🗄️ 데이터베이스  
-**MySQL** | **PostgreSQL** | **SQL Server**
-
-##### 🤖 AI & 머신러닝
-**LangChain** | **Ollama** | **Hugging Face**
-
----
-
+{% assign known_keys = site.data.category_names | map: "key" %}
+<ul class="category-list">
+{% for c in site.data.category_names %}
+  {% assign posts_in_cat = site.categories[c.key] %}
+  {% if posts_in_cat and posts_in_cat.size > 0 %}
+  <li><a href="{{ '/categories/' | relative_url }}#{{ c.key | slugify }}">{{ c.name }}</a> ({{ posts_in_cat.size }})</li>
+  {% endif %}
+{% endfor %}
+{% for cat in site.categories %}
+  {% unless known_keys contains cat[0] %}
+  <li><a href="{{ '/categories/' | relative_url }}#{{ cat[0] | slugify }}">{{ cat[0] }}</a> ({{ cat[1].size }})</li>
+  {% endunless %}
+{% endfor %}
+</ul>

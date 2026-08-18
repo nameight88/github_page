@@ -1,6 +1,7 @@
 ---
 layout: single
 title: "SQL-server 백업 자동화 하기"
+excerpt: "SID 불일치로 인한 DR 복원 실패를 방지하고, 백업·복원 스크립트를 배치 파일과 윈도우 스케줄러로 자동화하는 방법을 정리했다."
 date: 2024-05-12
 categories: 
   - sql-server

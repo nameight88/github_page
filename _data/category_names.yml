@@ -1,0 +1,11 @@
+# 카테고리 표시 이름과 노출 순서만 정의한다.
+# 새 카테고리로 글을 처음 쓸 때 여기에 한 줄 추가한다.
+# 글이 없는 카테고리는 이 목록에 있어도 메인 페이지에는 표시되지 않는다.
+- key: cpp
+  name: "C/C++"
+- key: programming
+  name: "프로그래밍"
+- key: sql-server
+  name: "SQL Server"
+- key: database
+  name: "데이터베이스"

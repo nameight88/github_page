@@ -1,6 +1,7 @@
 ---
 layout: single
 title: "Effective C++"
+excerpt: "#define 대신 const, enum, constexpr을 쓰는 이유와 예제를 정리."
 date: 2025-10-10
 categories: 
   - cpp

@@ -8,32 +8,18 @@ main:
     url: /posts/
 
 # 사이드바 카테고리 네비게이션
+# 운영 규칙: 새 분야의 글을 처음 쓸 때 이 파일과 _data/category_names.yml에
+# 각각 한 줄씩 추가한다. 사이드바는 정적 YAML이라 메인 페이지와 달리
+# 자동으로 생성되지 않는다.
 study-categories:
-  - title: "프로그래밍 언어"
+  - title: "프로그래밍"
+    url: /categories/#programming
     children:
-      - title: "Python"
-        url: /categories/#python
       - title: "C/C++"
         url: /categories/#cpp
-      - title: "Java"
-        url: /categories/#java
-      - title: "JavaScript"
-        url: /categories/#javascript
-  
+
   - title: "데이터베이스"
+    url: /categories/#database
     children:
-      - title: "MySQL"
-        url: /categories/#mysql
-      - title: "PostgreSQL"
-        url: /categories/#postgresql
       - title: "SQL Server"
         url: /categories/#sql-server
-  
-  - title: "AI/머신러닝"
-    children:
-      - title: "LangChain"
-        url: /categories/#langchain
-      - title: "Ollama"
-        url: /categories/#ollama
-      - title: "Hugging Face"
-        url: /categories/#huggingface
